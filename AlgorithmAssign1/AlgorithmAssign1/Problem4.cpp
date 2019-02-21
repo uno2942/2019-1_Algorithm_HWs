@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<cstdlib>
 using namespace std;
 
 struct Coord {
@@ -8,26 +8,31 @@ struct Coord {
 };
 
 Coord coordOrigin[100][100000];
-Coord coorddatax[100][100000];
-Coord coorddatay[100][100000];
-Coord arr2[100000];
+//Coord coorddatax[100][100000];
+//Coord coorddatay[100][100000];
+//Coord arr2[100000];
 long long len[100];
-long long ansx[100];
-long long ansy[100];
+long long ans[100];
+//long long ansx[100];
+//long long ansy[100];
 
-int CalcDistance(const long long* data1, int len, int index) {
-	int tot = 0;
-	int tmp = 0;
+long long CalcDistance2(const Coord* data1, int len, int index, long long bound) {
+	long long tot = 0;
 	for (int i = 0; i < len; i++) {
-		tmp = data1[i] - data1[index];
-		if (tmp > 0)
-			tot += tmp;
-		else
-			tot -= tmp;
+		tot += (abs(data1[i].x - data1[index].x) + abs(data1[i].y - data1[index].y));
+		if (tot-bound>0)
+			return tot;
 	}
 	return tot;
 }
-
+long long CalcDistance1(const Coord* data1, int len, int index) {
+	long long tot = 0;
+	for (int i = 0; i < len; i++) {
+		tot += (abs(data1[i].x - data1[index].x) + abs(data1[i].y - data1[index].y));
+	}
+	return tot;
+}
+/*
 class Merge {
 public:
 	static void mergesortx(Coord* arr1, int num) {
@@ -109,7 +114,7 @@ private:
 		}
 	}
 };
-
+*/
 int main() {
 	int num1;
 	cin >> num1;
@@ -119,28 +124,29 @@ int main() {
 		for (int j = 0; j < len[i]; j++)
 		{
 			cin >> coordOrigin[i][j].x >> coordOrigin[i][j].y;
-			coorddatax[i][j] = coordOrigin[i][j];
 		}
-		Merge merge = Merge();
-		merge.mergesortx(coorddatax[i], len[i]);
 	}
+	
 	int i, j;
+	long long temp1 = 0;
+	long long temp2 = 0;
+	
 	for (i = 0; i < num1; i++) {
-		for (j = 0; j < len[i]; j++)
+		temp1= CalcDistance1(coordOrigin[i], len[i], 0);
+		for (j = 1; j < len[i]; j++)
 		{
-			if (coorddatax[i][len[i] / 2].x == coorddatay[i][j].x)
-				break;
+			temp2 = CalcDistance2(coordOrigin[i], len[i], j, temp1);
+			if (temp1 > temp2)
+			{
+				temp1 = temp2;
+			}
 		}
-		ansx[i] = j;
+		ans[i] = temp1;
 	}
 	for (int i = 0; i < num1; i++)
 	{
-		for (int j = 0; j < len[i]; j++)
-		{
-			cout << mydatax[i][j] << ' ' << mydatay[i][j];
+			cout << ans[i];
 			cout << endl;
-		}
-		cout << endl;
 	}
 	return 0;
 }

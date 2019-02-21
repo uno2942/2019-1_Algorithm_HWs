@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 
 using namespace std;
 
@@ -6,10 +6,10 @@ long long num[1000000];
 int Calcnum(long long n) {
 	long long i;
 	long long temp;
-	for (i = 0; i < 50000; i++)
+	for (i = 0; i < 65537; i++)
 	{
 		temp = (2 * i + 1)*(2 * i + 1);
-		if (temp < 0 || temp - n >= 0)
+		if (temp - n >= 0)
 			break;
 	}
 	return i;
@@ -23,7 +23,6 @@ int main() {
 		cin >> num[i];
 	}
 	long long temp;
-	long long diff;
 	long long biggestnum;
 	long long smallnum;
 	long long middle;
@@ -32,25 +31,24 @@ int main() {
 		temp = Calcnum(num[i]);
 		biggestnum = (2 * temp + 1)*(2 * temp + 1);
 		smallnum = (2 * (temp - 1) + 1)*(2 * (temp - 1) + 1);
-		middle = (biggestnum * biggestnum + smallnum * smallnum)/2;
-		if (biggestnum < 0)
-		{
+		middle = (biggestnum + smallnum ) / 2;
 
-			continue;
+		
+		if (middle < num[i])
+		{
+			if (biggestnum - (2 * temp + 1) < num[i]) //west
+				cout << -temp << ' ' << temp - (biggestnum - num[i]);
+			else//south
+				cout << temp - (num[i] - middle) << ' ' << -temp;
 		}
 		else {
-			diff = biggestnum * biggestnum - num[i];
-			if (middle < num[i])
-			{
-				if (biggestnum - (2 * temp + 1) < num[i])
-					cout << -temp << ' ' << temp - diff;
-				else
-					cout << temp - (num[i] - middle) << ' ' << -2;
-			}
-			else {
-
-			}
+			if (smallnum + 2 * temp <= num[i])//east
+				cout << temp << ' ' << -temp + (middle - num[i]);
+			else//Nuclear
+				cout << -temp + (num[i] - smallnum) << ' ' << temp;
 		}
+		cout << endl;
 	}
 	return 0;
 }
+*/

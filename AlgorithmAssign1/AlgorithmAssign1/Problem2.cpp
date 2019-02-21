@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 
 using namespace std;
 
@@ -56,3 +56,4 @@ int main() {
 		cout << ans[i] << endl;
 	return 0;
 }
+*/

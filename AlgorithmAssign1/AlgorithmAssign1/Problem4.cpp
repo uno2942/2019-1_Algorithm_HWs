@@ -1,38 +1,17 @@
 #include<iostream>
-#include<cstdlib>
+
 using namespace std;
 
 struct Coord {
 	long long x;
 	long long y;
+	long long weight;
 };
 
-Coord coordOrigin[100][100000];
-//Coord coorddatax[100][100000];
-//Coord coorddatay[100][100000];
-//Coord arr2[100000];
-long long len[100];
+Coord coorddata[100][100000];
+Coord arr2[100000];
+int len[100];
 long long ans[100];
-//long long ansx[100];
-//long long ansy[100];
-
-long long CalcDistance2(const Coord* data1, int len, int index, long long bound) {
-	long long tot = 0;
-	for (int i = 0; i < len; i++) {
-		tot += (abs(data1[i].x - data1[index].x) + abs(data1[i].y - data1[index].y));
-		if (tot-bound>0)
-			return tot;
-	}
-	return tot;
-}
-long long CalcDistance1(const Coord* data1, int len, int index) {
-	long long tot = 0;
-	for (int i = 0; i < len; i++) {
-		tot += (abs(data1[i].x - data1[index].x) + abs(data1[i].y - data1[index].y));
-	}
-	return tot;
-}
-/*
 class Merge {
 public:
 	static void mergesortx(Coord* arr1, int num) {
@@ -44,7 +23,7 @@ public:
 	static void mergesorty(Coord* arr1, int num) {
 		for (int i = 0; i < num; i++)
 			arr2[i] = arr1[i];
-		Splitx(arr1, arr2, 0, num, true); //false means arr1 is sorted
+		Splity(arr1, arr2, 0, num, true); //false means arr1 is sorted
 	}
 private:
 	static void Splitx(Coord* arr1, Coord* arr2, int begin, int end, bool _whichArrayIsSorted) {
@@ -114,7 +93,43 @@ private:
 		}
 	}
 };
-*/
+
+void CalcDistancex(Coord* data1, int len) {
+	long long tot = 0;
+	long long tmp = 0;
+	for (int i = 0; i < len; i++) {
+		tmp += data1[i].x;
+	}
+	if (len > 0)
+	{
+		tmp -= len * data1[0].x;
+		data1[0].weight = tmp;
+	}
+	for (int i = 1; i < len; i++) {
+		tmp += (len - 2 * i)*data1[i - 1].x;
+		tmp -= (len - 2 * i)*data1[i].x;
+		data1[i].weight = tmp;
+	}
+}
+
+void CalcDistancey(Coord* data1, int len) {
+	long long tot = 0;
+	long long tmp = 0;
+	for (int i = 0; i < len; i++) {
+		tmp += data1[i].y;
+	}
+	if (len > 0)
+	{
+		tmp -= len * data1[0].y;
+		data1[0].weight += tmp;
+	}
+	for (int i = 1; i < len; i++) {
+		tmp += (len - 2 * i)*data1[i - 1].y;
+		tmp -= (len - 2 * i)*data1[i].y;
+		data1[i].weight += tmp;
+	}
+}
+
 int main() {
 	int num1;
 	cin >> num1;
@@ -123,30 +138,27 @@ int main() {
 		cin >> len[i];
 		for (int j = 0; j < len[i]; j++)
 		{
-			cin >> coordOrigin[i][j].x >> coordOrigin[i][j].y;
+			cin >> coorddata[i][j].x >> coorddata[i][j].y;
 		}
-	}
-	
-	int i, j;
-	long long temp1 = 0;
-	long long temp2 = 0;
-	
-	for (i = 0; i < num1; i++) {
-		temp1= CalcDistance1(coordOrigin[i], len[i], 0);
-		for (j = 1; j < len[i]; j++)
+		Merge merge = Merge();
+		merge.mergesortx(coorddata[i], len[i]);
+		CalcDistancex(coorddata[i], len[i]);
+		merge.mergesorty(coorddata[i], len[i]);
+		CalcDistancey(coorddata[i], len[i]);
+		
+		long long temp = 0;
+		if (len[i] > 0)
+			temp = coorddata[i][0].weight;
+		for (int j = 1; j < len[i]; j++)
 		{
-			temp2 = CalcDistance2(coordOrigin[i], len[i], j, temp1);
-			if (temp1 > temp2)
-			{
-				temp1 = temp2;
-			}
+			if (temp > coorddata[i][j].weight)
+				temp = coorddata[i][j].weight;
 		}
-		ans[i] = temp1;
+		ans[i] = temp;
 	}
+
 	for (int i = 0; i < num1; i++)
-	{
-			cout << ans[i];
-			cout << endl;
-	}
+		cout << ans[i] << endl;
+
 	return 0;
 }

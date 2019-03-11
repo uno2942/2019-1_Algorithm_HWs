@@ -10,7 +10,7 @@ public:
 	int y;
 	
 	bool operator <(const Line &a) const {
-		return this->y < a.y;
+		return this->l < a.l;
 	}
 };
 Line linelist[100][10000];

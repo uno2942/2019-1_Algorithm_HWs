@@ -18,5 +18,11 @@
     <ClCompile Include="Problem3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="p3temp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Problem1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

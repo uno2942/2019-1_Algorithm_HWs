@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 #include<list>
 #include<algorithm>
 #include<vector>
@@ -12,13 +12,22 @@ public:
 	bool operator <(const Line &a) const {
 		return this->l < a.l;
 	}
+	Line() {
+
+	}
+	Line(int _l, int _r, int _y)
+	{
+		l = _l;
+		r = _r;
+		y = _y;
+	}
 };
-vector<Line> linevec[20][100];
-int num[1000000];
+
+Line line[20][100][10000];
+vector<Line> ans[20];
+int temp[]
+int len[20][100];
 int num2[20];
-int indexes[20000];
-int leftmost;
-int rightmost;
 
 int main() {
 	int num1;
@@ -29,17 +38,23 @@ int main() {
 		cin >> num2[i];
 		for (int j = 0; j < num2[i]; j++) {
 			cin >> l >> r >> y;
-			linevec[i][y].push_back(Line(l, r));
+			line[i][y][len[i][y]].l = l;
+			line[i][y][len[i][y]].r = r;
+			len[i][y]++;
 ;		}
 		for(int j=0; j<100; j++)
-			sort(linevec[i][j].begin(), linevec[i][j].end());
+			sort(line[i][j], line[i][j]+len[i][j]);
 	}
 	for (int i = 0; i < num1; i++)
 	{
-		for (int j = 0; j < 100; j++) {
-			cout << linelist[i][j].l << ' ' << linelist[i][j].r << ' ' << linelist[i][j].y << endl;
+		for (int k = 0; k < len[i][99]; k++)
+			ans[i].push_back(Line(line[i][99][k].l, line[i][99][k].r, 99));
+		for (int j = 98; j >= 0; j--) {
+			for(int k=0; k<len[i][j]; k++)
+				
 		}
 	}
 	system("PAUSE");
 	return 0;
 }
+*/

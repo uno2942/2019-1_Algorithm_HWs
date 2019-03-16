@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="p3temp.cpp" />
+    <ClCompile Include="Problem1.cpp" />
     <ClCompile Include="Problem3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

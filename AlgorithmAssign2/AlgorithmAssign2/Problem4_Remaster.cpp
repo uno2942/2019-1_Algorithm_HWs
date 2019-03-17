@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 #include<algorithm>
 using namespace std;
 long long A[5000];
@@ -66,3 +66,4 @@ int main() {
 //	system("PAUSE");
 	return 0;
 }
+*/

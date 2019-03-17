@@ -120,6 +120,7 @@
     <ClCompile Include="Problem1.cpp" />
     <ClCompile Include="Problem2.cpp" />
     <ClCompile Include="Problem3.cpp" />
+    <ClCompile Include="Problem3_Remastered.cpp" />
     <ClCompile Include="Problem4.cpp" />
     <ClCompile Include="Problem4_Remaster.cpp" />
   </ItemGroup>

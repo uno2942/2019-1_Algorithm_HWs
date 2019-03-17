@@ -123,6 +123,7 @@
     <ClCompile Include="Problem3_Remastered.cpp" />
     <ClCompile Include="Problem4.cpp" />
     <ClCompile Include="Problem4_Remaster.cpp" />
+    <ClCompile Include="sibal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -39,5 +39,8 @@
     <ClCompile Include="Problem3_Remastered.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="sibal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
